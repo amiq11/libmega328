@@ -4,7 +4,17 @@
 int main(void){
     init();                     /* 初期化 */
 
-    
+    pin_out_init(DDRB,PB0);
+    pin_out_init(DDRD,PD7);
+    /* DDRB |= _BV(PB0); */
+    /* set_pin_hi(PORTB,PB0); */
+    /* PORTB |= _BV(PB0); */
+    /* delay_s(1); */
+    pwm_init(PWM_PB1);
+    pwm_init(PWM_PB2);
+    pwm_init(PWM_PB3);
+    pwm_set(2,1000);
+
     sei();                      /* 割り込み許可 */
 
 
@@ -48,93 +58,107 @@ int main(void){
             printf("pressed \"s\" key\n\n");
             break;
 
-        case 'u':
-            f_mode = UARTMODE;
-            printf("uart mode\n\n");
-            break;
+        /* case 'u': */
+        /*     f_mode = UARTMODE; */
+        /*     printf("uart mode\n\n"); */
+        /*     break; */
 
-        case 'p':
-            f_mode = PWMMODE;
+        /* case 'p': */
+        /*     f_mode = PWMMODE; */
 
-            int i;
-            for(i=0;i<6;i++)
-                pwm_init(i);
+        /*     int i; */
+        /*     for(i=0;i<6;i++) */
+        /*         pwm_init(i); */
 
-            printf("pwm mode\n\n");
-            break;
+        /*     printf("pwm mode\n\n"); */
+        /*     break; */
 
-        case 'a':
-            f_mode = ADCMODE;
+        /* case 'a': */
+        /*     f_mode = ADCMODE; */
             
-            adc_init(ADC0D);
-            adc_init(ADC1D);
-            adc_init(ADC2D);
-            adc_init(ADC3D);
-            adc_init(ADC4D);
-            adc_init(ADC5D);
+        /*     adc_init(ADC0D); */
+        /*     adc_init(ADC1D); */
+        /*     adc_init(ADC2D); */
+        /*     adc_init(ADC3D); */
+        /*     adc_init(ADC4D); */
+        /*     adc_init(ADC5D); */
             
-            printf("adc mode\n");
-            break;
+        /*     printf("adc mode\n"); */
+        /*     break; */
 
-        case 'o':
-            f_mode = OUTPUTMODE;
+        /* case 'o': */
+        /*     f_mode = OUTPUTMODE; */
 
-            pin_out_init(DDRB,PB1);
+        /*     pin_out_init(DDRB,PB1); */
 
-            printf("output mode\n");
-            break;
+        /*     printf("output mode\n"); */
+        /*     break; */
 
-        case 'i':
-            f_mode = INPUTMODE;
+        /* case 'i': */
+        /*     f_mode = INPUTMODE; */
 
-            pin_in_init(DDRB,PB1);
+        /*     pin_in_init(DDRB,PB1); */
             
-            printf("input mode\n");
-            break;
+        /*     printf("input mode\n"); */
+        /*     break; */
         }
 
-        if(char_to_int(bufc)>=0 && char_to_int(bufc)<6) {
-            pwm_set(f_pwmnum,0);
-            duty=0;
+        if(char_to_int(bufc)>=0 && char_to_int(bufc)<=9) {
+            /* duty=0; */
             f_pwmnum=char_to_int(bufc);
             printf("pwm mode is changed to %d\n\n",f_pwmnum);
         }
-
+        
         
         if(f_start){
 
+            set_pin_hi(PORTB,PB0);
+            pwm_set(3,f_pwmnum*200);
+            delay_ms(1);
+            set_pin_low(PORTB,PB0);
+            pwm_set(3,0);
+            delay_us(200);
+
+            
+            set_pin_hi(PORTD,PD7);
+            pwm_set(4,f_pwmnum*200);
+            delay_ms(1);
+            set_pin_low(PORTD,PD7);
+            pwm_set(4,0);
+            delay_us(200);
+            
             /* PWMテスト */
-            if(f_mode == PWMMODE){
-                pwm_set(f_pwmnum,duty); /* PWMset */
-                printf("\033[%dA" ,1); /* カーソル移動 */
-                printf("%05ld %2ld%% \n",duty,duty*100/0x7FF); /* duty表示 */
-                if(duty<=0x7F0) duty+=0x0F;
-                else duty = 0;
-            }
+            /* if(f_mode == PWMMODE){ */
+            /*     pwm_set(f_pwmnum,duty); /\* PWMset *\/ */
+            /*     printf("\033[%dA" ,1); /\* カーソル移動 *\/ */
+            /*     printf("%05ld %2ld%% \n",duty,duty*100/0x7FF); /\* duty表示 *\/ */
+            /*     if(duty<=0x7F0) duty+=0x0F; */
+            /*     else duty = 0; */
+            /* } */
 
-            /* ADCテスト */
-            if(f_mode == ADCMODE){
-                printf("%04d ",adc_read(ADC0D));
-                printf("%04d ",adc_read(ADC1D));
-                printf("%04d ",adc_read(ADC2D));
-                printf("%04d ",adc_read(ADC3D));
-                printf("%04d ",adc_read(ADC4D));
-                printf("%04d\n",adc_read(ADC5D));
-            }
+            /* /\* ADCテスト *\/ */
+            /* if(f_mode == ADCMODE){ */
+            /*     printf("%04d ",adc_read(ADC0D)); */
+            /*     printf("%04d ",adc_read(ADC1D)); */
+            /*     printf("%04d ",adc_read(ADC2D)); */
+            /*     printf("%04d ",adc_read(ADC3D)); */
+            /*     printf("%04d ",adc_read(ADC4D)); */
+            /*     printf("%04d\n",adc_read(ADC5D)); */
+            /* } */
 
-            /* 出力テスト */
-            if(f_mode == OUTPUTMODE){
-                set_pin_hi(PORTB,PB1);
-                delay_ms(100);
-                set_pin_low(PORTB,PB1);
-                delay_ms(890);
-            }
+            /* /\* 出力テスト *\/ */
+            /* if(f_mode == OUTPUTMODE){ */
+            /*     set_pin_hi(PORTB,PB1); */
+            /*     delay_ms(100); */
+            /*     set_pin_low(PORTB,PB1); */
+            /*     delay_ms(890); */
+            /* } */
 
-            /* 入力テスト */
-            if(f_mode == INPUTMODE){
-            }
+            /* /\* 入力テスト *\/ */
+            /* if(f_mode == INPUTMODE){ */
+            /* } */
         }
-        delay_ms(10);
+        /* delay_ms(10); */
     }
     
     

@@ -2,6 +2,8 @@
 objs = main.o
 LIB_PATH = ./library
 LIB = $(LIB_PATH)/library.a
+# API_PATH = ./api
+# API = $(API_PATH)/api.a
 
 CC=avr-gcc
 WP=avrdude
@@ -16,7 +18,7 @@ CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH)
 
 
 # make だけでライブラリも更新
-# all: lib main.hex
+# all: lib main.hex api
 
 # make だけだとカレントフォルダのみ
 all: main.hex
@@ -25,15 +27,20 @@ all: main.hex
 
 .PHONY: full
 full: lib main.hex
+# full: api lib main.hex
 
 .PHONY: lib
 lib:
 	(cd $(LIB_PATH); make)
 
+# .PHONY: api
+# api:
+# 	(cd $(API_PATH); make)
+
 main.hex: main.elf
 	avr-objcopy $< -O ihex $@
 
-main.elf: $(objs) $(LIB)
+main.elf: $(objs) $(LIB) $(API)
 	$(CC) $(CFLAGS) -o $@ $(objs) $(LIB)
 
 .c.o:
@@ -42,6 +49,7 @@ main.elf: $(objs) $(LIB)
 .PHONY: full_clean
 full_clean: clean
 	(cd $(LIB_PATH); make clean)
+	# (cd $(API_PATH); make clean)
 
 .PHONY: clean
 clean:

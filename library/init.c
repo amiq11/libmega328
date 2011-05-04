@@ -13,17 +13,6 @@ void init(void){
     uart_init(br115200);
 
     /* ここから */
-    pin_out_init(DDRB,PB1);
-
-    /* int i; */
-    /* for(i=0;i<6;i++) */
-    /*     pwm_init(i); */
-    /* adc_init(ADC0D); */
-    /* adc_init(ADC1D); */
-    /* adc_init(ADC2D); */
-    /* adc_init(ADC3D); */
-    /* adc_init(ADC4D); */
-    /* adc_init(ADC5D); */
 }
 
 
