@@ -2,8 +2,8 @@
 objs = main.o
 LIB_PATH = ./library
 LIB = $(LIB_PATH)/library.a
-# API_PATH = ./api
-# API = $(API_PATH)/api.a
+API_PATH = ./api
+API = $(API_PATH)/api.a
 
 CC=avr-gcc
 WP=avrdude
@@ -26,16 +26,16 @@ all: main.hex
 
 
 .PHONY: full
-full: lib main.hex
-# full: api lib main.hex
+# full: lib main.hex
+full: api lib main.hex
 
 .PHONY: lib
 lib:
 	(cd $(LIB_PATH); make)
 
-# .PHONY: api
-# api:
-# 	(cd $(API_PATH); make)
+.PHONY: api
+api:
+	(cd $(API_PATH); make)
 
 main.hex: main.elf
 	avr-objcopy $< -O ihex $@
@@ -49,7 +49,7 @@ main.elf: $(objs) $(LIB) $(API)
 .PHONY: full_clean
 full_clean: clean
 	(cd $(LIB_PATH); make clean)
-	# (cd $(API_PATH); make clean)
+	(cd $(API_PATH); make clean)
 
 .PHONY: clean
 clean:

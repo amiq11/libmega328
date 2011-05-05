@@ -20,6 +20,6 @@
    プロトタイプ宣言
 ------------------ */
 
-void pwm_init(int id);
-void pwm_set(int id, uint16_t duty);
+void init_pwm(int id);
+void set_pwm(int id, uint8_t duty);
 #endif /* Not def: __PWM_H__ */

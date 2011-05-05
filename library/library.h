@@ -6,7 +6,6 @@
 #include <avr/interrupt.h>
 
 
-#include "hardware.h"
 #include "delay.h"
 #include "init.h"
 #include "libserial.h"
@@ -14,6 +13,7 @@
 #include "basic_io.h"
 #include "adc.h"
 #include "pwm.h"
+#include "interrupt.h"
 
 
 #endif

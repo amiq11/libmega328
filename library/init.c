@@ -3,12 +3,12 @@
 #include "library.h"
 #include "uart_clk.h"
 
-void all_port_init(void);
+void init_all_port(void);
 
 /* 初期化 */
 void init(void){
     /* 全て一旦HiZに */
-    all_port_init();
+    init_all_port();
     /* だいたいUSARTはつかうっしょ */
     uart_init(br115200);
 
@@ -17,7 +17,7 @@ void init(void){
 
 
 /* 全てHiZに */
-void all_port_init(void){
+void init_all_port(void){
     DDRB = 0x00;
     PORTB = 0x00;
     DDRC = 0x00;

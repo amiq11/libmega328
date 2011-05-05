@@ -101,8 +101,8 @@ void uart_init(const unsigned int baud){
     rxbuf.in=0;
 
 
-    /* 割り込み許可 */
-    sei();
+    /* /\* 割り込み許可 *\/ */
+    /* sei(); */
 }
 
 
