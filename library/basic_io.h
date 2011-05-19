@@ -15,5 +15,7 @@
 /* 入力 */
 #define read_pin(port,pin) (((port)>>(pin))&0x01)
 
+/* #define write_port(port,pin) ((port) = (val)) */
 
 #endif /* Not def: __BASIC_IO_H__ */
+

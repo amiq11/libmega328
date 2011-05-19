@@ -10,7 +10,7 @@ CLOCK=20000000
 
 CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK)
 
-.SUFFIXES: .c .o .h
+.SUFFIXES: .c .o
 
 all: library.a
 
@@ -21,13 +21,10 @@ library.a: $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-.h.o:
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-
 
 .PHONY: clean
 clean:
 	rm -f $(OBJS) $(LIB)
 
 
+basic_io.o: basic_io.h library.h

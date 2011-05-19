@@ -27,7 +27,7 @@ all: main.hex
 
 .PHONY: full
 # full: lib main.hex
-full: api lib main.hex
+full: lib api main.hex
 
 .PHONY: lib
 lib:

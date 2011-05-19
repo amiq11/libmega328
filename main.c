@@ -12,11 +12,11 @@ int main(void){
     init_interrupt();
     
     pin_out_init(DDRB,PB4);
-    set_pin_hi(PORTB,PB4);
-    printf("set hi\n");
-    delay_ms(500);
-    set_pin_low(PORTB,PB4);
-    printf("set low\n");
+    /* set_pin_hi(PORTB,PB4); */
+    /* printf("set hi\n"); */
+    /* delay_ms(500); */
+    /* set_pin_low(PORTB,PB4); */
+    /* printf("set low\n"); */
 
 
     pin_out_init(DDRB,PB0);
