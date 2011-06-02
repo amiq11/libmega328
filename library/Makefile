@@ -5,7 +5,7 @@ SRCS := $(wildcard *.c)
 OBJS = $(subst .c,.o,$(SRCS))
 
 CC=avr-gcc
-TARGET=atmega88p
+TARGET=atmega168p
 CLOCK=20000000
 
 CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK)
@@ -28,3 +28,7 @@ clean:
 
 
 basic_io.o: basic_io.h library.h
+delay.o: delay.h library.h
+init.o: init.h library.h
+interrupt.o: interrupt.h library.h
+libserial.o: libserial.h library.h

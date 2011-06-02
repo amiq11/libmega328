@@ -8,11 +8,13 @@ void init_all_port(void);
 /* 初期化 */
 void init(void){
     /* 全て一旦HiZに */
-    init_all_port();
+    /* init_all_port(); */
     /* だいたいUSARTはつかうっしょ */
     uart_init(br115200);
-
-    /* ここから */
+    /* led用のポートとか設定 */
+    init_led();
+    init_interrupt();
+    init_accel();
 }
 
 
@@ -26,3 +28,4 @@ void init_all_port(void){
     PORTD = 0x00;
 }
 
+    

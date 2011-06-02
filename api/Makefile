@@ -9,10 +9,10 @@ LIB = $(LIB_PATH)/library.a
 
 
 CC=avr-gcc
-TARGET=atmega88p
+TARGET=atmega168p
 CLOCK=20000000
 
-CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH)
+CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) 
 
 .SUFFIXES: .c .o .h
 
@@ -37,3 +37,5 @@ $(LIB):
 .PHONY: clean
 clean:
 	rm -f $(OBJS) $(API)
+
+# dynamic_led.o: dynamic_led.h api.h 

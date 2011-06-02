@@ -1,5 +1,12 @@
 # Makefile
-objs = main.o
+objs = main.o control.o
+
+EFUSE=0x01
+HFUSE=0xdc
+LFUSE=0xc7
+
+
+
 LIB_PATH = ./library
 LIB = $(LIB_PATH)/library.a
 API_PATH = ./api
@@ -9,9 +16,10 @@ CC=avr-gcc
 WP=avrdude
 WRITER=usbasp
 
-DEVICE=atmega88p
+DEVICE=atmega168p
 CLOCK=20000000
-CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH)
+CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
+# CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK)
 
 
 .SUFFIXES: .c .o
@@ -27,7 +35,7 @@ all: main.hex
 
 .PHONY: full
 # full: lib main.hex
-full: lib api main.hex
+full: api lib main.hex
 
 .PHONY: lib
 lib:
@@ -41,7 +49,7 @@ main.hex: main.elf
 	avr-objcopy $< -O ihex $@
 
 main.elf: $(objs) $(LIB) $(API)
-	$(CC) $(CFLAGS) -o $@ $(objs) $(LIB)
+	$(CC) $(CFLAGS) -o $@ $(objs) $(LIB) $(API)
 
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -64,3 +72,6 @@ write:
 t:
 	$(WP) -c $(WRITER) -p $(DEVICE) -t -B50
 
+.PHONY: fusewrite
+fusewrite:
+	$(WP) -c $(WRITER) -p $(DEVICE) -U efuse:w:$(EFUSE):m -U hfuse:w:$(HFUSE):m -U lfuse:w:$(LFUSE):m -B50

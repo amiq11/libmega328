@@ -2,26 +2,32 @@
 
 #include "library.h"
 
-void adc_init(int id){
+void init_adc(int id){
     
     switch(id){
     case ADC0D:
         pin_in_init(DDRC,PC0);
+        cbi(PORTC,PC0);
         break;
     case ADC1D:
         pin_in_init(DDRC,PC1);
+        cbi(PORTC,PC1);
         break;
     case ADC2D:
         pin_in_init(DDRC,PC2);
+        cbi(PORTC,PC2);
         break;
     case ADC3D:
         pin_in_init(DDRC,PC3);
+        cbi(PORTC,PC3);
         break;
     case ADC4D:
         pin_in_init(DDRC,PC4);
+        cbi(PORTC,PC4);
         break;
     case ADC5D:
         pin_in_init(DDRC,PC5);
+        cbi(PORTC,PC5);
         break;
     }
 
@@ -34,7 +40,7 @@ void adc_init(int id){
 
 }
 
-uint16_t adc_read(int id){
+uint16_t read_adc(int id){
     uint16_t buf=0;
     sbi(DIDR0,id);
     ADMUX = ((ADMUX&0xF0) | id);
