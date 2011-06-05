@@ -9,7 +9,7 @@ LIB = $(LIB_PATH)/library.a
 
 
 CC=avr-gcc
-TARGET=atmega168p
+TARGET=atmega328p
 CLOCK=20000000
 
 CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) 

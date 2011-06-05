@@ -1,10 +1,15 @@
 # Makefile
 objs = main.o control.o
 
-EFUSE=0x01
-HFUSE=0xdc
-LFUSE=0xc7
+# m168p
+# EFUSE=0x01
+# HFUSE=0xdc
+# LFUSE=0xc7
 
+# m328p
+EFUSE=0x04
+HFUSE=0xd9
+LFUSE=0xc7
 
 
 LIB_PATH = ./library
@@ -16,7 +21,7 @@ CC=avr-gcc
 WP=avrdude
 WRITER=usbasp
 
-DEVICE=atmega168p
+DEVICE=atmega328p
 CLOCK=20000000
 CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
 # CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK)
@@ -36,6 +41,7 @@ all: main.hex
 .PHONY: full
 # full: lib main.hex
 full: api lib main.hex
+# full: main.hex
 
 .PHONY: lib
 lib:

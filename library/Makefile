@@ -5,7 +5,7 @@ SRCS := $(wildcard *.c)
 OBJS = $(subst .c,.o,$(SRCS))
 
 CC=avr-gcc
-TARGET=atmega168p
+TARGET=atmega328p
 CLOCK=20000000
 
 CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK)

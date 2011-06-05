@@ -17,5 +17,9 @@
 
 /* #define write_port(port,pin) ((port) = (val)) */
 
+
+uint8_t get_sw(uint8_t val);
+void init_sw(void);
+
 #endif /* Not def: __BASIC_IO_H__ */
 

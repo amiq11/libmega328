@@ -14,17 +14,25 @@ uint8_t get_led_status(LED_t id, uint8_t num){
 }
 
 
-void set_led(LED_t id, uint8_t num, uint8_t duty){
-    led_status[id][num] = duty;
+void set_led(uint8_t id,uint8_t duty){
+    if(id<4) led_status[RED][id]     = duty;
+    else     led_status[GREEN][id-4] = duty;
 }
+    
+/* void set_led(LED_t id, uint8_t num, uint8_t duty){ */
+/*     led_status[id][num] = duty; */
+/* } */
 
+/* void set_led_line */
 
 void set_color_led(uint8_t red_val, uint8_t green_val, uint8_t blue_val){
-    /* LED_t id = COLOR; */
-    led_status[1][0] = red_val;
-    led_status[1][1] = green_val;
-    led_status[1][2] = blue_val;
+    led_status[COLOR][0] = red_val;
+    led_status[COLOR][1] = green_val;
+    led_status[COLOR][2] = blue_val;
 }
+
+
+
 
 
 void set_ledset(LED_t id, uint8_t *duty){

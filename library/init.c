@@ -13,6 +13,7 @@ void init(void){
     uart_init(br115200);
     /* led用のポートとか設定 */
     init_led();
+    init_sw();
     init_interrupt();
     init_accel();
 }
