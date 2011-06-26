@@ -23,7 +23,7 @@ WRITER=usbasp
 
 DEVICE=atmega328p
 CLOCK=20000000
-CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
+CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
 # CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK)
 
 
@@ -53,6 +53,7 @@ api:
 
 main.hex: main.elf
 	avr-objcopy $< -O ihex $@
+	avr-size $@
 
 main.elf: $(objs) $(LIB) $(API)
 	$(CC) $(CFLAGS) -o $@ $(objs) $(LIB) $(API)
