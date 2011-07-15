@@ -6,9 +6,12 @@
 extern void control(void);
 
 /* たいま割り込みべくた */
+/* 1/4msごとに呼ばれる */
 ISR(TIMER1_COMPA_vect){
     control();
 }
+
+
 
 /* ISR(TIMER1_COMPB_vect){ */
 /*     set_pin_low(PORTB,PB0); */
@@ -36,10 +39,12 @@ ISR(TIMER1_COMPA_vect){
 /* }     */
 
 
+/* init_interrupt() */
+/* 割り込みの初期化 */
 void init_interrupt(void){
     /* timer1をつかって割り込み */
     /* 制御周期は1ms */
-    /* といいつつ、3msになった */
+    /* といいつつ、1/4ms */
     
     /* WGM = 12 TOP:ICR1 CTCmode */
     

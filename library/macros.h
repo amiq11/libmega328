@@ -12,10 +12,11 @@
 /* デバッグ用printfを吐く */
 #define DEBUG_PRINT
 
-#define max(val1,val2) (((val1)>(val2))?(val1):(val2))
-#define min(val1,val2) (((val1)<(val2))?(val1):(val2))
-#define abs(val) (((val)>=0)?(val):(-val))
-#define sbi(byte,bit) ((byte)|=1<<(bit))
-#define cbi(byte,bit) ((byte)&=~(1<<(bit)))
+
+#define max(val1,val2) (((val1)>(val2))?(val1):(val2)) /* val1とval2の最大値 */
+#define min(val1,val2) (((val1)<(val2))?(val1):(val2)) /* val1とval2の最小値 */
+#define abs(val) (((val)>=0)?(val):(-val))             /* valの絶対値 */
+#define sbi(byte,bit) ((byte)|=1<<(bit))               /* byteのうちbitビットを1にする */
+#define cbi(byte,bit) ((byte)&=~(1<<(bit)))            /* byteのうちbitビットを0にする */
 
 #endif

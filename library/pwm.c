@@ -3,6 +3,10 @@
 #include "library.h"
 
 
+/* init_pwm(id) */
+/* PWMの設定 */
+/* id:PWM_PDとかPBいくつ */
+
 void init_pwm(int id){
     switch(id){
     case PWM_PD6:
@@ -48,7 +52,7 @@ void init_pwm(int id){
 
 
 /* dutyは0〜0xFF(つまり255) */
-/* 16bitタイマの場合は3bitシフトしてます。 */
+/* 16bitタイマの場合は3bitシフトしてます。もったいない */
 /* てかこれってどうするのがいいんだろう。 */
 void set_pwm(int id, uint8_t duty){
     switch(id){
@@ -72,10 +76,3 @@ void set_pwm(int id, uint8_t duty){
         break;
     }
 }
-        
-
-
-
-
-        
-       

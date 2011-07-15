@@ -18,14 +18,17 @@ API_PATH = ./api
 API = $(API_PATH)/api.a
 
 CC=avr-gcc
-WP=avrdude
-WRITER=usbasp
+# WP=avrdude
+# WRITER=usbasp
+WP=hidspx
+WRITER=hidaspx
 
 DEVICE=atmega328p
 CLOCK=20000000
 CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
 # CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK)
-
+# WFLAGS=-c $(WRITER) -p $(DEVICE) -U flash:w:main.hex
+WFLAGS=main.hex -d0
 
 .SUFFIXES: .c .o
 
@@ -73,7 +76,7 @@ clean:
 .PHONY: write
 write:
 	make
-	$(WP) -c $(WRITER) -p $(DEVICE) -U flash:w:main.hex
+	$(WP) $(WFLAGS)
 
 .PHONY: t
 t:
@@ -81,4 +84,5 @@ t:
 
 .PHONY: fusewrite
 fusewrite:
-	$(WP) -c $(WRITER) -p $(DEVICE) -U efuse:w:$(EFUSE):m -U hfuse:w:$(HFUSE):m -U lfuse:w:$(LFUSE):m -B50
+#	# $(WP) -c $(WRITER) -p $(DEVICE) -U efuse:w:$(EFUSE):m -U hfuse:w:$(HFUSE):m -U lfuse:w:$(LFUSE):m -B50
+	$(WP) -fX$(EFUSE) -fH$(HFUSE) -fL$(LFUSE)

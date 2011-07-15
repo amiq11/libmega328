@@ -2,6 +2,10 @@
 
 #include "library.h"
 
+/* init_adc(id) */
+/* 引数：ADC0D〜ADC5D(enumで定義されている。) */
+/* 機能：ADCの初期化を行う */
+/* 　　　ADCを使うために、library/init.c内のinit()、またはmain関数のseiの前に定義してください。 */
 void init_adc(int id){
     
     switch(id){
@@ -40,6 +44,9 @@ void init_adc(int id){
 
 }
 
+/* read_adc(id) */
+/* 引数：ADC0D〜ADC5D */
+/* 機能；ADCを読み込む。返り値は10bit(だったはず) */
 uint16_t read_adc(int id){
     uint16_t buf=0;
     sbi(DIDR0,id);

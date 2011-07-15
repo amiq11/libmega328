@@ -13,9 +13,12 @@ void init(void){
     uart_init(br115200);
     /* led用のポートとか設定 */
     init_led();
+    /* スイッチの設定 */
     init_sw();
-    init_interrupt();
+    /* 加速度センサの設定 */
     init_accel();
+    /* 割り込みの設定 */
+    init_interrupt();
 }
 
 

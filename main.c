@@ -4,14 +4,17 @@
 #include <avr/eeprom.h>
 #include <math.h>
 
-#define pushed_on(id) ((old_sw[(id)]==0 && get_sw((id))==1)?1:0)
-#define save_sw_condition(id) (old_sw[(id)] = get_sw((id)))
+/* 以下の二つを使うためには、old_sw[]という配列が、スイッチのid分の大きさで必要 */
+#define pushed_on(id) ((old_sw[(id)]==0 && get_sw((id))==1)?1:0) /* スイッチが押されたか確かめる。 */
+#define save_sw_condition(id) (old_sw[(id)] = get_sw((id))) /* pushed_on()を使うためにこれがpushed_onの後に必要。 */
 
 
 
 int main(void){
 
     init();                     /* 初期化 */
+    init_adc(ADC3D);            /* ジョイスティック */
+    init_adc(ADC4D);
     sei();                      /* 割り込み許可 */
 
 
@@ -39,6 +42,10 @@ int main(void){
         buf[X]=get_accel(X);
         buf[Y]=get_accel(Y);
         buf[Z]=get_accel(Z);
+        /* buf[X]=read_adc(ADC3D); */
+        /* buf[Y]=read_adc(ADC4D); */
+        /* buf[Z]=0; */
+        
         
         /* buf[X]=get_accel_direct(X); */
         /* buf[Y]=get_accel_direct(Y); */

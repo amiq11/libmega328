@@ -17,7 +17,7 @@ typedef enum _LED{
 
 
 void clear_all_led(void);
-void select_led(uint8_t id);
+void select_led(LED_t id);
 void set_led_pwm(uint8_t id, uint8_t duty);
 void init_led(void);
 void init_accel(void);
