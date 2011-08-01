@@ -14,6 +14,9 @@ uint8_t get_led_status(LED_t id, uint8_t num){
 }
 
 
+/* set_led(id,duty) */
+/* id:0-7 */
+/* 赤も緑も関係なく一列になっている */
 void set_led(uint8_t id,uint8_t duty){
     if(id<4) led_status[RED][id]     = duty;
     else     led_status[GREEN][id-4] = duty;
@@ -25,16 +28,18 @@ void set_led(uint8_t id,uint8_t duty){
 
 /* void set_led_line */
 
+/* set_color_led(red,green,blue) */
+/* RGBそれぞれ0-255 */
 void set_color_led(uint8_t red_val, uint8_t green_val, uint8_t blue_val){
     led_status[COLOR][0] = red_val;
     led_status[COLOR][1] = green_val;
     led_status[COLOR][2] = blue_val;
 }
 
-
-
-
-
+/* set_ledset(id,*duty) */
+/* id:0(RED),1(COLOR),2(GREEN) */
+/* dutyはuint8_tの4要素の配列のポインタを渡してあげる */
+/* 機能：配列をいっぺんに代入する */
 void set_ledset(LED_t id, uint8_t *duty){
     int i;
     for(i=0; i<4; i++)
@@ -42,6 +47,8 @@ void set_ledset(LED_t id, uint8_t *duty){
 }
 
 
+/* get_led_status_nextline(*duty) */
+/* 次に表示する行のledのdutyを返す。 */
 void get_led_status_nextline(uint8_t *duty){
     uint8_t i;
     if(nextline >=2) nextline = 0;
@@ -50,7 +57,9 @@ void get_led_status_nextline(uint8_t *duty){
         *duty = led_status[nextline][i];
 }
 
-
+/* led_control(void) */
+/* LEDをダイナミック点灯させる。 */
+/* 具体的には、次の行のデータを読み込んで、dutyをセットする */
 void led_control(void){
     uint8_t duty[4]={0};
     uint8_t i;
