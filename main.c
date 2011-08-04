@@ -36,9 +36,9 @@ int main(void){
             set_pin_low(PORTB,PB0);
             _delay_us(5.8);
             set_pin_hi(PORTB,PB0);
-            delay_us(10);
+            /* delay_us(10); */
         /* } */
-        delay_ms(100);
+        /* delay_ms(100); */
     }
             
         /* static uint8_t old_sw[8]={0}; */

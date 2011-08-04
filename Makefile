@@ -25,7 +25,8 @@ WRITER=hidaspx
 
 DEVICE=atmega88p
 CLOCK=20000000
-CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -L$(LIB_PATH) -L$(API_PATH) -I$(LIB_PATH) -I$(API_PATH) -g
+# CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -L$(LIB_PATH) -L$(API_PATH) -I$(LIB_PATH) -I$(API_PATH) -g
+CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g
 # CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -DF_CPU=$(CLOCK)
 # WFLAGS=-c $(WRITER) -p $(DEVICE) -U flash:w:main.hex
 WFLAGS=main.hex -d0
@@ -59,7 +60,7 @@ main.hex: main.elf
 	avr-size $@
 
 main.elf: $(objs) $(LIB) $(API)
-	$(CC) $(CFLAGS) -o $@ $(objs) $(LIB) $(API)
+	$(CC) $(CFLAGS) -o $@ $(objs) $(API) $(LIB)
 
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
