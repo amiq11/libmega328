@@ -12,7 +12,8 @@ CC=avr-gcc
 TARGET=atmega328p
 CLOCK=20000000
 
-CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) 
+# CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -I$(LIB_PATH) 
+CFLAGS=-W -Wall -mmcu=$(TARGET) -Os -DF_CPU=$(CLOCK) -L$(LIB_PATH) -I$(LIB_PATH)
 
 .SUFFIXES: .c .o .h
 
