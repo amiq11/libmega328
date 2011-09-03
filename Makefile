@@ -23,7 +23,7 @@ CC=avr-gcc
 WP=hidspx
 WRITER=hidaspx
 
-DEVICE=atmega88p
+DEVICE=atmega328p
 CLOCK=20000000
 # CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -L$(LIB_PATH) -L$(API_PATH) -I$(LIB_PATH) -I$(API_PATH) -g
 CFLAGS=-W -Wall -mmcu=$(DEVICE) -Os -std=gnu99 -DF_CPU=$(CLOCK) -I$(LIB_PATH) -I$(API_PATH) -g

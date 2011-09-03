@@ -1,13 +1,18 @@
 make fullでライブラリまでmakeします
 一旦make fullしたらあとは
-sudo make write
+make write
 でOKです
 
 fuse bitを書きこむときは
-sudo make fusewrite
+make fusewrite
 とすればOKです。一応makefileには記述してありますが、
+atmega168pのときは
 efuse:0xf9
 hfuse:0xdc
 lfuse:0xc7
-(atmega168pのとき)
+mega328pなら
+EFUSE=0x04
+HFUSE=0xd9
+LFUSE=0xc7
+
 としてください。
